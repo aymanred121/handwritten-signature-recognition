@@ -202,7 +202,7 @@ class SingleInference_YOLOV7:
                         color = self.colors[self.names.index(name)]
                         name += ' '+str(score)
                         cv2.rectangle(image,self.box[:2],self.box[2:],color,2)
-                        cv2.putText(image,name,(self.box[0], self.box[1] - 2),cv2.FONT_HERSHEY_SIMPLEX,0.75,[225, 255, 255],thickness=2)
+                        cv2.putText(image,name,(self.box[0], self.box[1] - 2),cv2.FONT_HERSHEY_SIMPLEX,0.75,[225, 255, 255],thickness=3)
                     self.image=image
                 else:
                     self.image=self.im0.copy()
@@ -291,6 +291,10 @@ with st.container():
             img = img.resize((1024, 1024))
             st.image(img)
             #name = st.text_input("Enter The Name Of The Image : ")
+            
+
+        if st.button("Detect"):
+            st.write("Signature Detection Result:")
             img_size=1024
             path_yolov7_weights="runs/train/best.pt"
             path_img_i=full_path
@@ -305,11 +309,6 @@ with st.container():
             app.inference() #make single inference
             image = app.show() #show results
             st.image(image)
-            
-            
-
-        if st.button("Detect"):
-            st.write("Signature Detection Result:")
     with right_col:
         st_lottie(animation, height=400, width=350, key='Signature Detection')
 
